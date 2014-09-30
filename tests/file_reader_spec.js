@@ -1,6 +1,6 @@
 describe("File reader", function() {
   var Promise = require("bluebird");
-  var fileReader = require("../src/file_reader");
+  var fileReader = require("../src/modules/file_reader");
 
   var el;
 
