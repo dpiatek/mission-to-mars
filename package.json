@@ -27,5 +27,8 @@
     "browserify": "^4.0.0",
     "karma-browserify": "~0.2.1",
     "karma-chrome-launcher": "~0.1.4"
+  },
+  "dependencies": {
+    "bluebird": "~2.3.4"
   }
 }
