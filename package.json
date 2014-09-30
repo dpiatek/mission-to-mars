@@ -19,5 +19,12 @@
     "email": "do.piatek@gmail.com",
     "url": "http://dominikpiatek.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "karma": "~0.12.23",
+    "karma-jasmine": "~0.1.5",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "browserify" : "^4.0.0",
+    "karma-browserify": "~0.2.1"
+  }
 }
