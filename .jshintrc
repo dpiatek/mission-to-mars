@@ -6,7 +6,8 @@
     "beforeEach": false,
     "afterEach": false,
     "sinon": false,
-    "require": false
+    "require": false,
+    "Promise": true
   },
   "strict": false,
   "node": true
