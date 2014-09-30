@@ -1,0 +1,23 @@
+{
+  "name": "mission-to-mars",
+  "version": "0.0.1",
+  "description": "Essential mission control app for any Mars expedition.",
+  "main": "mars.js",
+  "scripts": {
+    "test": "karma start --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpiatek/mission-to-mars"
+  },
+  "keywords": [
+    "mars",
+    "robots"
+  ],
+  "author": {
+    "name": "Dominik Piatek",
+    "email": "do.piatek@gmail.com",
+    "url": "http://dominikpiatek.com"
+  },
+  "license": "MIT"
+}
