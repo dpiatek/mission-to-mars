@@ -1,5 +1,3 @@
-var Promise = require("bluebird");
-
 /**
  * @name FileReader
  * @desc Simple file reader
@@ -7,7 +5,7 @@ var Promise = require("bluebird");
  * @param {String} id The id of the file input
  * @returns {Promise}
  */
-module.exports = function(el, id) {
+module.exports = function(el, id, callback) {
   var input = el.getElementById(id);
   var reader = new FileReader();
 
@@ -19,13 +17,7 @@ module.exports = function(el, id) {
     reader.readAsText(this.files[0]);
   });
 
-  return new Promise(function(resolve, reject) {
-    reader.addEventListener("load", function() {
-      resolve(reader.result);
-    });
-
-    reader.addEventListener("error", function(err) {
-      reject(err);
-    });
+  reader.addEventListener("load", function() {
+    callback(reader.result);
   });
 };

@@ -1,16 +1,10 @@
 describe("File reader", function() {
-  var Promise = require("bluebird");
   var fileReader = require("../src/modules/file_reader");
 
   var fragment;
 
   beforeEach(function(){
     fragment = setupDocumentFragment();
-  });
-
-  it("returns a promise", function() {
-    var promise = fileReader(fragment, "foo");
-    expect(promise instanceof Promise).toBeTruthy();
   });
 
   it("throws if an input is not found", function() {
