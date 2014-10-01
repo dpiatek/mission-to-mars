@@ -1,5 +1,3 @@
-var util = require("util");
-
 /**
  * @name Instructions Parser
  * @desc Parse input and create an Instructions instance.
