@@ -1,5 +1,5 @@
 describe("Exploration area", function() {
-  // var ExplorationArea = require("../src/modules/exploration_area");
+  var ExplorationArea = require("../src/modules/exploration_area");
   var areaSizeMock = { xAxis: 5, yAxis: 3 };
   var area;
 
