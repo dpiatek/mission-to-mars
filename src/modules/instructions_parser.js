@@ -5,9 +5,7 @@
  * @returns {Object}
  */
 module.exports = function instructionParser(input) {
-  if (!input || typeof input !== "string") {
-    throw new Error("Could not parse input.");
-  }
+  validateInput(input);
 
   var firstNewLineIndex = input.indexOf("\n");
   var firstLine = input.slice(0, firstNewLineIndex).split(" ");
@@ -20,18 +18,47 @@ module.exports = function instructionParser(input) {
     yAxis: Number(firstLine[1])
   };
 
+  var robots = robotInstructions.map(function(val, index) {
+    var values = val.trim().split("\n");
+    var startPosition = values[0].split(" ");
+    var x = Number(startPosition[0]);
+    var y = Number(startPosition[1]);
+    var facing = startPosition[2];
+    var instructions = values[1].split("");
+
+    return {
+      id: index,
+      start: { x: x, y: y, facing: facing },
+      instructions: instructions
+    };
+  });
+
+  return {
+    areaSize: validateAreaSize(areaSize),
+    robots: validateRobots(robots)
+  };
+};
+
+function validateInput(input) {
+  if (!input || typeof input !== "string") {
+    throw new Error("Could not parse input.");
+  }
+
+  return input;
+}
+
+function validateAreaSize(areaSize) {
   if (areaSize.xAxis < 1 || areaSize.yAxis < 1) {
     throw new Error("Area size is invalid.");
   }
 
-  var robots = robotInstructions.map(function(val, index) {
-    var values = val.split("\n");
-    // [0] is just a newline
-    var startPosition = values[1].split(" ");
-    var x = Number(startPosition[0]);
-    var y = Number(startPosition[1]);
-    var facing = startPosition[2];
-    var instructions = values[2].split("");
+  return areaSize;
+}
+
+function validateRobots(robots) {
+  robots.forEach(function(robot, index) {
+    var x = robot.start.x, y = robot.start.y;
+    var facing = robot.start.facing, instructions = robot.instructions;
 
     if (isNaN(x) || isNaN(y)) {
       throw new Error("Robot " + index + " start position is invalid.");
@@ -44,16 +71,7 @@ module.exports = function instructionParser(input) {
     if (instructions.length > 0 && !/[NSWEF]/.test(instructions)) {
       throw new Error("Robot " + index + " instructions are invalid.");
     }
-
-    return {
-      id: index,
-      start: { x: x, y: y, facing: facing },
-      instructions: instructions
-    };
   });
 
-  return {
-    areaSize: areaSize,
-    robots: robots
-  };
-};
+  return robots;
+}
