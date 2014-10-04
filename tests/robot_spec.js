@@ -59,7 +59,7 @@ describe("Robot", function() {
     });
 
     it("does not move into a fatal area", function() {
-      areaMock.markAsFatal(3, 3, "N");
+      areaMock.markAsFatal(3, 2, "N");
       robot.moveForward();
       expect(robot.y).toEqual(missionMock.start.y);
     });

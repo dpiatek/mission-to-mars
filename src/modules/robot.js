@@ -70,6 +70,11 @@ function moveForward() {
       break;
     case 'E':
       ++newCoord.x;
+      break;
+  }
+
+  if (this.area.moveIsFatal(this.x, this.y, this.facing)) {
+    return;
   }
 
   if (this.area.isOutOfBound(newCoord.x, newCoord.y)) {
@@ -78,12 +83,8 @@ function moveForward() {
     return;
   }
 
-  if (this.area.moveIsFatal(newCoord.x, newCoord.y, this.facing)) {
-    return;
-  } else {
-    this.x = newCoord.x;
-    this.y = newCoord.y;
-  }
+  this.x = newCoord.x;
+  this.y = newCoord.y;
 }
 
 function results() {
