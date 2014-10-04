@@ -68,7 +68,7 @@ function validateRobots(robots) {
       throw new Error("Robot " + index + " facing direction is invalid.");
     }
 
-    if (instructions.length > 0 && !/[NSWEF]/.test(instructions)) {
+    if (instructions.length > 0 && !/[RLF]/.test(instructions)) {
       throw new Error("Robot " + index + " instructions are invalid.");
     }
   });
