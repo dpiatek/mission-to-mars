@@ -26,9 +26,13 @@ function isOutOfBound(x, y) {
 
 function markAsFatal(x, y, face) {
   var coord = { x: x, y: y, facing: face };
-  return (_.where(this.fatalCooridinates, coord).length > 0) || this.fatalCooridinates.push(coord);
+  return hasObject(this.fatalCooridinates, coord) || this.fatalCooridinates.push(coord);
 }
 
 function moveIsFatal(x, y, face) {
-  return _.find(this.fatalCooridinates, { x: x, y: y, facing: face });
+  return hasObject(this.fatalCooridinates, { x: x, y: y, facing: face });
+}
+
+function hasObject(collection, obj) {
+  return _.where(collection, obj).length > 0;
 }
