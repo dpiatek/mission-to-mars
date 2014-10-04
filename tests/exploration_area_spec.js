@@ -16,7 +16,8 @@ describe("Exploration area", function() {
   });
 
   it("reveals fatal coordinates", function() {
-    area.markAsFatal(4, 3);
-    expect(area.isFatal(4, 3)).toBeTruthy();
+    area.markAsFatal(4, 3, "N");
+    area.markAsFatal(4, 3, "N");
+    expect(area.moveIsFatal(4, 3, "N")).toBeTruthy();
   });
 });

@@ -18,17 +18,17 @@ function ExplorationArea(areaSize) {
 
 ExplorationArea.prototype.isOutOfBound = isOutOfBound;
 ExplorationArea.prototype.markAsFatal = markAsFatal;
-ExplorationArea.prototype.isFatal = isFatal;
+ExplorationArea.prototype.moveIsFatal = moveIsFatal;
 
 function isOutOfBound(x, y) {
   return x > this.xAxis || y > this.yAxis;
 }
 
-function markAsFatal(x, y) {
-  var coord = { x: x, y: y };
-  return _.contains(this.fatalCooridinates, coord) || this.fatalCooridinates.push(coord);
+function markAsFatal(x, y, face) {
+  var coord = { x: x, y: y, facing: face };
+  return (_.where(this.fatalCooridinates, coord).length > 0) || this.fatalCooridinates.push(coord);
 }
 
-function isFatal(x, y) {
-  return _.find(this.fatalCooridinates, { x: x, y: y });
+function moveIsFatal(x, y, face) {
+  return _.find(this.fatalCooridinates, { x: x, y: y, facing: face });
 }
