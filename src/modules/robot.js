@@ -50,8 +50,8 @@ function explore(instructions) {
 function turn(direction) {
   var currentDirectionIndex = _.indexOf(FACES, this.facing);
   var newDirectionIndex = (direction === 'R') ? currentDirectionIndex + 1 : currentDirectionIndex - 1;
-  if (newDirectionIndex === FACES.length) newDirectionIndex = newDirectionIndex - FACES.length;
-  if (newDirectionIndex < 0) newDirectionIndex = newDirectionIndex + FACES.length;
+  if (newDirectionIndex === FACES.length) newDirectionIndex -= FACES.length;
+  if (newDirectionIndex < 0) newDirectionIndex += FACES.length;
   this.facing = FACES[newDirectionIndex];
 }
 
