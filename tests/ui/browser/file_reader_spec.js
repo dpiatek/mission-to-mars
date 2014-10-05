@@ -1,5 +1,5 @@
 describe("File reader", function() {
-  var fileReader = require("../src/modules/file_reader");
+  var fileReader = require("../../../src/ui/browser/file_reader");
 
   var fragment;
 

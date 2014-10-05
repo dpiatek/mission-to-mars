@@ -30,7 +30,7 @@ module.exports = function(config) {
 
     browserify: {
       files: [
-        'tests/*.js'
+        'tests/**/*.js'
       ]
     },
 

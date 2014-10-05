@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/piatek/projects/mission-to-mars/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -6787,32 +6787,7 @@
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/piatek/projects/mission-to-mars/src/mars.js":[function(require,module,exports){
-var fileInput = require('./modules/file_reader');
-var resultsFormatter = require('./modules/results_formatter');
-
-var instructionsParser = require('./modules/instructions_parser');
-var ExplorationArea = require('./modules/exploration_area');
-var Robot = require('./modules/robot');
-
-fileInput(document, 'input', function(input) {
-  var instructions = instructionsParser(input);
-
-  var area = new ExplorationArea(instructions.areaSize);
-
-  var results = instructions.robots.map(function(mission) {
-    var robot = new Robot(mission.id);
-    robot.deploy(area, mission.start);
-    robot.explore(mission.instructions);
-    return robot.results();
-  });
-
-  document
-    .getElementById('output')
-    .textContent = resultsFormatter(results);
-});
-
-},{"./modules/exploration_area":"/Users/piatek/projects/mission-to-mars/src/modules/exploration_area.js","./modules/file_reader":"/Users/piatek/projects/mission-to-mars/src/modules/file_reader.js","./modules/instructions_parser":"/Users/piatek/projects/mission-to-mars/src/modules/instructions_parser.js","./modules/results_formatter":"/Users/piatek/projects/mission-to-mars/src/modules/results_formatter.js","./modules/robot":"/Users/piatek/projects/mission-to-mars/src/modules/robot.js"}],"/Users/piatek/projects/mission-to-mars/src/modules/exploration_area.js":[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 var _ = require('lodash');
 
 /**
@@ -6852,32 +6827,7 @@ function hasObject(collection, obj) {
   return _.where(collection, obj).length > 0;
 }
 
-},{"lodash":"/Users/piatek/projects/mission-to-mars/node_modules/lodash/dist/lodash.js"}],"/Users/piatek/projects/mission-to-mars/src/modules/file_reader.js":[function(require,module,exports){
-/**
- * @name FileReader
- * @desc Simple file reader
- * @param {Element} el The element that will be searched for the file input
- * @param {String} id The id of the file input
- * @returns {Promise}
- */
-module.exports = function(el, id, callback) {
-  var input = el.getElementById(id);
-  var reader = new FileReader();
-
-  if (!input || input.type !== "file") {
-    throw new Error("Could not find a valid file input with the id '" + id + "'");
-  }
-
-  input.addEventListener("change", function() {
-    reader.readAsText(this.files[0]);
-  });
-
-  reader.addEventListener("load", function() {
-    callback(reader.result);
-  });
-};
-
-},{}],"/Users/piatek/projects/mission-to-mars/src/modules/instructions_parser.js":[function(require,module,exports){
+},{"lodash":1}],3:[function(require,module,exports){
 /**
  * @name Instructions Parser
  * @desc Parse input and create an Instructions instance.
@@ -6956,7 +6906,7 @@ function validateRobots(robots) {
   return robots;
 }
 
-},{}],"/Users/piatek/projects/mission-to-mars/src/modules/results_formatter.js":[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var _ = require("lodash");
 
 /**
@@ -6983,7 +6933,7 @@ module.exports = function(collection) {
   return output.join("\n");
 };
 
-},{"lodash":"/Users/piatek/projects/mission-to-mars/node_modules/lodash/dist/lodash.js"}],"/Users/piatek/projects/mission-to-mars/src/modules/robot.js":[function(require,module,exports){
+},{"lodash":1}],5:[function(require,module,exports){
 var _ = require('lodash');
 var FACES = ['N', 'E', 'S', 'W'];
 
@@ -7082,4 +7032,61 @@ function results() {
   };
 }
 
-},{"lodash":"/Users/piatek/projects/mission-to-mars/node_modules/lodash/dist/lodash.js"}]},{},["/Users/piatek/projects/mission-to-mars/src/mars.js"]);
+},{"lodash":1}],6:[function(require,module,exports){
+var fileInput = require('./browser/file_reader');
+
+var resultsFormatter = require('../modules/results_formatter');
+var instructionsParser = require('../modules/instructions_parser');
+var ExplorationArea = require('../modules/exploration_area');
+var Robot = require('../modules/robot');
+
+/*
+ * Example usage in a browser
+ */
+fileInput(document, 'input', function(input) {
+  var instructions = instructionsParser(input);
+
+  document
+    .getElementById('input-data')
+    .textContent = input;
+
+  var area = new ExplorationArea(instructions.areaSize);
+
+  var results = instructions.robots.map(function(mission) {
+    var robot = new Robot(mission.id);
+    robot.deploy(area, mission.start);
+    robot.explore(mission.instructions);
+    return robot.results();
+  });
+
+  document
+    .getElementById('output-data')
+    .textContent = resultsFormatter(results);
+});
+
+},{"../modules/exploration_area":2,"../modules/instructions_parser":3,"../modules/results_formatter":4,"../modules/robot":5,"./browser/file_reader":7}],7:[function(require,module,exports){
+/**
+ * @name FileReader
+ * @desc Simple file reader
+ * @param {Element} el The element that will be searched for the file input
+ * @param {String} id The id of the file input
+ * @returns {Promise}
+ */
+module.exports = function(el, id, callback) {
+  var input = el.getElementById(id);
+  var reader = new FileReader();
+
+  if (!input || input.type !== "file") {
+    throw new Error("Could not find a valid file input with the id '" + id + "'");
+  }
+
+  input.addEventListener("change", function() {
+    reader.readAsText(this.files[0]);
+  });
+
+  reader.addEventListener("load", function() {
+    callback(reader.result);
+  });
+};
+
+},{}]},{},[6]);

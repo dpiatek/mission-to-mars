@@ -30,7 +30,6 @@
     "karma-browserifast": "~0.7.0"
   },
   "dependencies": {
-    "bluebird": "~2.3.4",
     "lodash": "~2.4.1"
   }
 }
