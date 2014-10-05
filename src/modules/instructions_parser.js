@@ -1,3 +1,5 @@
+var _ = require("lodash");
+
 /**
  * @name Instructions Parser
  * @desc Parse input and create an Instructions instance.
@@ -18,7 +20,7 @@ module.exports = function instructionParser(input) {
     yAxis: Number(firstLine[1])
   };
 
-  var robots = robotInstructions.map(function(val, index) {
+  var robots = _.map(robotInstructions, function(val, index) {
     var values = val.trim().split("\n");
     var startPosition = values[0].split(" ");
     var x = Number(startPosition[0]);
@@ -56,7 +58,7 @@ function validateAreaSize(areaSize) {
 }
 
 function validateRobots(robots) {
-  robots.forEach(function(robot, index) {
+  _.forEach(robots, function(robot, index) {
     var x = robot.start.x, y = robot.start.y;
     var facing = robot.start.facing, instructions = robot.instructions;
 
